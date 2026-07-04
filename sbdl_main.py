@@ -12,7 +12,18 @@ if __name__ == '__main__':
     job_run_env = sys.argv[1].upper()
     load_date = sys.argv[2]
 
+    # spark = Utils.get_spark_session(job_run_env)
+    # logger = Log4j(spark)
+    #
+    # # logger.info("Finished creating Spark Session")
+    # logger.info("TEST: SparkSession is alive")
+    # # print("sbdl finished creating spark session")
     spark = Utils.get_spark_session(job_run_env)
-    logger = Log4j(spark)
 
+    # Force Spark to use INFO level
+    spark.sparkContext.setLogLevel("INFO")
+
+    logger = Log4j(spark)
     logger.info("Finished creating Spark Session")
+    spark.range(1).count()
+
